@@ -1,19 +1,19 @@
 import { Router } from 'express';
 import ProductController from '../controllers/ProductController';
-import CelebrateValidationId from '../validation/CelebrateValidation';
+import Validation from '../validation/CelebrateProductValidation';
 
 const productRoutes = Router();
 const controller = new ProductController();
-const validation = new CelebrateValidationId();
+const validation = new Validation();
 
 productRoutes.get('/', controller.index);
 
-productRoutes.get('/:id', validation.idValidate, controller.show);
+productRoutes.get('/:id', validation.show, controller.show);
 
-productRoutes.post('/', validation.createValidate, controller.create);
+productRoutes.post('/', validation.create, controller.create);
 
-productRoutes.put('/', validation.updateValidation, controller.update);
+productRoutes.put('/', validation.update, controller.update);
 
-productRoutes.delete('/:id', validation.idValidate, controller.delete);
+productRoutes.delete('/:id', validation.show, controller.delete);
 
 export default productRoutes;

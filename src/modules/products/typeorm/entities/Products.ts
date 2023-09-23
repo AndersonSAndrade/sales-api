@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 
 @Entity('adhem_products')
-export class Products {
+class Products {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -26,3 +26,5 @@ export class Products {
   @UpdateDateColumn()
   updated_at: Date;
 }
+
+export default Products;

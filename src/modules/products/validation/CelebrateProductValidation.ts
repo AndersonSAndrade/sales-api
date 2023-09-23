@@ -1,13 +1,13 @@
 import { celebrate, Joi, Segments } from 'celebrate';
 
-class CelebrationValidation {
-  public idValidate = celebrate({
+class Validation {
+  public show = celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
     },
   });
 
-  public createValidate = celebrate({
+  public create = celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
       price: Joi.number().precision(2).required(),
@@ -15,7 +15,7 @@ class CelebrationValidation {
     },
   });
 
-  public updateValidation = celebrate({
+  public update = celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
       price: Joi.number().precision(2).required(),
@@ -27,4 +27,4 @@ class CelebrationValidation {
   });
 }
 
-export default CelebrationValidation;
+export default Validation;
