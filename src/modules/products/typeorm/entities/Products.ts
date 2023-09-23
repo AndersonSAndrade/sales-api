@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('adhem-adhem_products')
+@Entity('adhem_products')
 export class Products {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -24,5 +24,5 @@ export class Products {
   created_at: Date;
 
   @UpdateDateColumn()
-  uptated_at: Date;
+  updated_at: Date;
 }

@@ -10,15 +10,16 @@ interface IRequest {
 }
 
 class CreateProductService {
-  public async execute({ name, price, quantity }: IRequest): Promise<Products> {
+  public async execute({
+    name,
+    price,
+    quantity,
+  }: IRequest): Promise<Products | AppError> {
     const repository = getCustomRepository(ProductRepository);
 
     const procuctExsists = await repository.findByName(name);
     if (procuctExsists) {
-      throw new AppError(
-        `Já existe um produto com este nome => ${procuctExsists.name}`,
-        400,
-      );
+      throw new AppError(`Já existe um produto com este nome`);
     }
 
     const product = repository.create({
