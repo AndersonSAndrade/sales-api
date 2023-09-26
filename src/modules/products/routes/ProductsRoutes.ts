@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import ProductController from '../controllers/ProductController';
-import Validation from '../validation/CelebrateProductValidation';
+import Validation from '../validation/CelebrateProducFamilytValidation';
 
 const productRoutes = Router();
 const controller = new ProductController();

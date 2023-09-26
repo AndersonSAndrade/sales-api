@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import CreateProductService from '../services/product/CreateProductService';
-import ListProductService from '../services/product/ListProductService';
-import ShowProductService from '../services/product/ShowProductService';
-import UpdateProductService from '../services/product/UpdateProductService';
-import DeleteProductService from '../services/product/DeleteProductService';
+import ListFamilyService from '../services/family/ListFamilyService';
+import ShowFamilyService from '../services/family/ShowFamilyService';
+import CreateFamilyService from '../services/family/CreateFamilyService';
+import UpdateFamilyService from '../services/family/UpdateFamilyService';
+import DeleteFamilyService from '../services/family/DeleteFamilyService';
 
 /**
  * @author Anderson S. Andrade
@@ -18,9 +18,9 @@ class ProductController {
    * @author Anderson S. Andrade
    */
   public async index(request: Request, response: Response): Promise<Response> {
-    const service = new ListProductService();
-    const products = await service.execute();
-    return response.json(products);
+    const service = new ListFamilyService();
+    const family = await service.execute();
+    return response.json(family);
   }
 
   /**
@@ -32,9 +32,9 @@ class ProductController {
    */
   public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.body;
-    const service = new ShowProductService();
-    const products = await service.execute({ id });
-    return response.json(products);
+    const service = new ShowFamilyService();
+    const family = await service.execute({ id });
+    return response.json(family);
   }
 
   /**
@@ -45,26 +45,12 @@ class ProductController {
    * @author Anderson S. Andrade
    */
   public async create(request: Request, response: Response): Promise<Response> {
-    const {
+    const { name } = request.body;
+    const service = new CreateFamilyService();
+    const family = await service.execute({
       name,
-      price,
-      quantity,
-      ross_weight,
-      net_weight,
-      toler_weight,
-      volume,
-    } = request.body;
-    const service = new CreateProductService();
-    const product = await service.execute({
-      name,
-      price,
-      quantity,
-      ross_weight,
-      net_weight,
-      toler_weight,
-      volume,
     });
-    return response.json(product);
+    return response.json(family);
   }
 
   /**
@@ -75,28 +61,13 @@ class ProductController {
    * @author Anderson S. Andrade
    */
   public async update(request: Request, response: Response): Promise<Response> {
-    const {
+    const { id, name } = request.body;
+    const service = new UpdateFamilyService();
+    const family = await service.execute({
       id,
       name,
-      price,
-      quantity,
-      ross_weight,
-      net_weight,
-      toler_weight,
-      volume,
-    } = request.body;
-    const service = new UpdateProductService();
-    const product = await service.execute({
-      id,
-      name,
-      price,
-      quantity,
-      ross_weight,
-      net_weight,
-      toler_weight,
-      volume,
     });
-    return response.json(product);
+    return response.json(family);
   }
 
   /**
@@ -108,7 +79,7 @@ class ProductController {
    */
   public async delete(request: Request, response: Response): Promise<Response> {
     const { id } = request.body;
-    const service = new DeleteProductService();
+    const service = new DeleteFamilyService();
     await service.execute({ id });
     return response.json({});
   }

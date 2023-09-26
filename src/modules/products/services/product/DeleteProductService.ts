@@ -1,14 +1,13 @@
 import { getCustomRepository } from 'typeorm';
-import { Products } from '../typeorm/entities/Products';
-import { ProductRepository } from '../typeorm/repositories/ProductsRepository';
 import AppError from '@shared/errors/AppError';
+import { ProductRepository } from '@modules/products/typeorm/repositories/ProductsRepository';
 
 interface IRequest {
   id: string;
 }
 
-class ShowProductService {
-  public async execute({ id }: IRequest): Promise<Products> {
+class DeleteProductService {
+  public async execute({ id }: IRequest): Promise<void> {
     const repository = getCustomRepository(ProductRepository);
 
     const product = await repository.findOne(id);
@@ -17,8 +16,8 @@ class ShowProductService {
       throw new AppError('O Produto não existe no sistema', 404);
     }
 
-    return product;
+    await repository.remove(product);
   }
 }
 
-export default ShowProductService;
+export default DeleteProductService;

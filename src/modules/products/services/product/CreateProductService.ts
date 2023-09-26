@@ -1,12 +1,16 @@
 import { getCustomRepository } from 'typeorm';
-import { ProductRepository } from '../typeorm/repositories/ProductsRepository';
+import { ProductRepository } from '../../typeorm/repositories/ProductsRepository';
 import AppError from '@shared/errors/AppError';
-import { Products } from '../typeorm/entities/Products';
+import Products from '../../typeorm/entities/Products';
 
 interface IRequest {
   name: string;
   price: number;
   quantity: number;
+  ross_weight: number;
+  net_weight: number;
+  toler_weight: number;
+  volume: number;
 }
 
 class CreateProductService {
@@ -14,6 +18,10 @@ class CreateProductService {
     name,
     price,
     quantity,
+    ross_weight,
+    net_weight,
+    toler_weight,
+    volume,
   }: IRequest): Promise<Products | AppError> {
     const repository = getCustomRepository(ProductRepository);
 
@@ -26,6 +34,10 @@ class CreateProductService {
       name,
       price,
       quantity,
+      ross_weight,
+      net_weight,
+      toler_weight,
+      volume,
     });
 
     await repository.save(product);

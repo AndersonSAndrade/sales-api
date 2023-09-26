@@ -1,12 +1,13 @@
 import { Router } from 'express';
 import UserController from '../controllers/UserController';
 import ValidationUser from '../validations/CelebrateUserValidation';
+import isAuthenticated from '../middlewares/isAuthenticated';
 
 const userRoutes = Router();
 const controller = new UserController();
 const validation = new ValidationUser();
 
-userRoutes.get('/', controller.index);
+userRoutes.get('/', isAuthenticated, controller.index);
 
 userRoutes.get('/:id', validation.show, controller.show);
 

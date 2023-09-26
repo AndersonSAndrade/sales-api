@@ -20,6 +20,18 @@ class Products {
   @Column('int')
   quantity: number;
 
+  @Column('decimal')
+  ross_weight: number;
+
+  @Column('decimal')
+  net_weight: number;
+
+  @Column('decimal')
+  toler_weight: number;
+
+  @Column('int')
+  volume: number;
+
   @CreateDateColumn()
   created_at: Date;
 

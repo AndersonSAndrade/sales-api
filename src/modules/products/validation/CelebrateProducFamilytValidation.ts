@@ -10,19 +10,15 @@ class Validation {
   public create = celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
-      price: Joi.number().precision(2).required(),
-      quantity: Joi.number().required(),
     },
   });
 
   public update = celebrate({
     [Segments.BODY]: {
-      name: Joi.string().required(),
-      price: Joi.number().precision(2).required(),
-      quantity: Joi.number().required(),
-    },
-    [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
+      name: Joi.string().min(3).max(100).required(),
+      created_at: Joi.date(),
+      updated_at: Joi.date(),
     },
   });
 }

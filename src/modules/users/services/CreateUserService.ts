@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm';
 import User from '../typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
 import { UserRepository } from '../typeorm/repositories/UserRepository';
+import SecurityUtil from '@shared/utility/security';
 
 interface IRequest {
   firstname: string;
@@ -30,11 +31,14 @@ class CreateUserService {
       throw new AppError(`Já existe um usuário com este nome`);
     }
 
+    const security = new SecurityUtil();
+    const passEncrypt = security.hashSync(password);
+
     const user = repository.create({
       firstname,
       lastname,
       email,
-      password,
+      password: passEncrypt,
       avatar,
       phone,
       biography,
